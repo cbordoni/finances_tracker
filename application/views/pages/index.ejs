@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="container">
+		<header><%- include('../partials/header', { goBack: false }); %></header>
+
+		<main>
+			<ul>
+				<% todos.forEach((todo) => { %>
+				<li>
+					<div class="card">
+						<p><strong>Title</strong> <%= todo.title %></p>
+
+						<p><strong>Status </strong> <%= todo.completed ? 'Completed' : 'Incomplete' %></p>
+
+						<p>
+							<a href="/todo/<%= todo.id %>">View</a>
+						</p>
+					</div>
+				</li>
+				<% }); %>
+			</ul>
+		</main>
+
+		<footer><%- include('../partials/footer'); %></footer>
+	</body>
+</html>
