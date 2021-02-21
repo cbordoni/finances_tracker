@@ -1,9 +1,60 @@
-<% if (goBack) { %>
-<button class="icon" onclick="location.href='/'">
-	<i class="material-icons">chevron_left</i>
-</button>
-<% } %>
+<header>
+	<div class="header-main">
+		<% if (locals.backIcon) { %>
+		<div class="header-left-action" style="margin: auto">
+			<button id="bt-home" class="icon">
+				<i class="material-icons"><%= backIcon %></i>
+			</button>
+		</div>
+		<% } %>
 
-<div class="header-main">
-	<h2 class="header-title">SSR using EJS</h2>
-</div>
+		<!--  -->
+
+		<% if (locals.title) { %>
+		<div class="row">
+			<div>
+				<h6 id="header-title"><%= title %></h6>
+			</div>
+		</div>
+		<% } else { %>
+		<!--  -->
+		<%- include('./month-picker'); %>
+		<!--  -->
+		<% } %>
+	</div>
+
+	<% if (locals.title) { %>
+	<div class="header-sub"><%- include('./month-picker'); %></div>
+	<% } %>
+
+	<!--  -->
+
+	<% if (locals.monthBalance) { %>
+	<div class="header-sub">
+		<div style="margin: 12px 0; padding: 0 30px">
+			<div id="balance-info" class="row">
+				<div>
+					<span class="text-primary">Initial</span>
+					<span class="text-secondary"><%= formatMoney(monthBalance.openingBalance) %></span>
+				</div>
+
+				<div>
+					<span class="text-primary">Balance</span>
+					<span class="text-secondary" style="font-size: 18px; color: #ffffff"
+						><%= formatMoney(monthBalance.balance) %></span
+					>
+				</div>
+
+				<div>
+					<span class="text-primary">Foreseen</span>
+					<span class="text-secondary"><%= formatMoney(monthBalance.foreseen) %></span>
+				</div>
+			</div>
+		</div>
+
+		<div style="padding: 0 24px">
+			<canvas id="expensesChart" width="100%" height="100px"></canvas>
+		</div>
+	</div>
+	<% } %>
+</header>

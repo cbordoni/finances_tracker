@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="dark-mode">
+		<div id="app-container">
+			<%- include('../partials/header'); %>
+
+			<main>
+				<div class="grid-container">
+					<div class="card rounded">
+						<div class="card-header">
+							<h6 class="card-title">Overview</h6>
+						</div>
+
+						<div id="overview-container" class="card-body">
+							<ul class="list">
+								<% overview.forEach((item) => { %>
+								<li href="<%= item.href %>" class="row" tabindex="0">
+									<div class="flex">
+										<span class="text-primary"><%= item.title %></span>
+										<span class="text-secondary">Foreseen</span>
+									</div>
+
+									<div style="text-align: right">
+										<span class="text-primary"><%= formatMoney(item.fulfilled) %></span>
+										<span class="text-secondary"><%= formatMoney(item.remaining) %></span>
+									</div>
+								</li>
+								<% }); %>
+							</ul>
+						</div>
+					</div>
+
+					<%- include('../partials/expenses/list'); %>
+
+					<!-- -->
+
+					<%- include('../partials/accounts/list'); %>
+				</div>
+
+				<button class="floating-action">
+					<i class="material-icons">add</i>
+				</button>
+			</main>
+		</div>
+
+		<%- include('../partials/foot'); %>
+
+		<script>
+			var ctx = document.querySelector('#expensesChart').getContext('2d');
+
+			var labels = '<%= weekExpenses.map((e) => e.title) %>'.split(',');
+			var data = '<%= weekExpenses.map((e) => e.amount) %>'.split(',');
+
+			new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: labels,
+					datasets: [
+						{
+							data: data,
+							pointBackgroundColor: '#c9574d',
+							pointBorderColor: '#c9574d',
+							backgroundColor: '#2d2e31',
+							borderColor: '#3f3f41',
+							borderWidth: 2.0,
+						},
+					],
+				},
+				options: {
+					legend: {
+						display: false,
+					},
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						yAxes: [
+							{
+								gridLines: {
+									display: false,
+								},
+								display: false,
+								ticks: {
+									display: false,
+									beginAtZero: true,
+								},
+							},
+						],
+						xAxes: [
+							{
+								gridLines: {
+									display: false,
+								},
+								ticks: {
+									beginAtZero: true,
+								},
+							},
+						],
+					},
+				},
+			});
+		</script>
+	</body>
+</html>

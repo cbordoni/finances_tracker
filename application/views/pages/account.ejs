@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+	<head>
+		<%- include('../partials/head'); %>
+	</head>
+	<body class="container">
+		<header>
+			<%- include('../partials/header', { goBack: false, close: true, actions: [{}], color: 'header-red' }); %>
+		</header>
+
+		<main>
+			<ul>
+				<% expenses.forEach((expense) => { %>
+				<li>
+					<div class="card">
+						<p><strong>Title</strong> <%= expense.title %></p>
+
+						<p><strong>Status </strong> <%= expense.completed ? 'Completed' : 'Incomplete' %></p>
+
+						<p>
+							<a href="/expense/<%= expense.id %>">View</a>
+						</p>
+					</div>
+				</li>
+				<% }); %>
+			</ul>
+		</main>
+
+		<footer><%- include('../partials/footer'); %></footer>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+{
+	"background_color": "#ffffff",
+	"description": "Lets save some money, you modafoca",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "https://abs.twimg.com/responsive-web/client-web/icon-default.ee534d85.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "https://abs.twimg.com/responsive-web/client-web/icon-default-large.8e027b65.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"purpose": "maskable",
+			"src": "https://abs.twimg.com/responsive-web/client-web/icon-default-maskable.2fd29c85.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"purpose": "maskable",
+			"src": "https://abs.twimg.com/responsive-web/client-web/icon-default-maskable-large.ee2b7aa5.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"name": "Finances",
+	"shortcuts": [
+		{
+			"name": "New expense",
+			"url": "/expenses?utm_source=jumplist&utm_medium=shortcut",
+			"icons": [
+				{
+					"src": "https://abs.twimg.com/responsive-web/client-web/icon-compose.12384425.png",
+					"type": "image/png",
+					"sizes": "192x192"
+				}
+			]
+		},
+		{
+			"name": "New income",
+			"url": "/incomes?utm_source=jumplist&utm_medium=shortcut",
+			"icons": [
+				{
+					"src": "https://abs.twimg.com/responsive-web/client-web/icon-search-stroke.5f9aa885.png",
+					"type": "image/png",
+					"sizes": "192x192"
+				}
+			]
+		}
+	],
+	"short_name": "Finances",
+	"start_url": "http://localhost:9000/?utm_source=homescreen&utm_medium=shortcut",
+	"theme_color": "#ffffff",
+	"scope": "/",
+	"android_package_name": "com.claudiobordoni.finances"
+}

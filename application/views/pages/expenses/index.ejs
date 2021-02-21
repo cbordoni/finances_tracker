@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+	<head>
+		<%- include('../../partials/head'); %>
+	</head>
+	<body class="dark-mode">
+		<div id="app-container">
+			<%- include('../../partials/header'); %>
+
+			<main>
+				<div class="painel">
+					<% if (expenses.length) { %>
+
+					<ul class="list">
+						<% expenses.forEach((item) => { %>
+						<li class="w-border w-icon row" tabindex="0">
+							<div class="rounded-icon">
+								<i class="material-icons"><%= getStatusIcon(item) %></i>
+							</div>
+
+							<div class="flex">
+								<span class="text-secondary"><%= item.account.title %></span>
+								<span class="text-primary"><%= item.title %></span>
+							</div>
+
+							<div style="text-align: right">
+								<span class="text-primary"><%= formatMoney(item.amount) %></span>
+								<span class="text-secondary"><%= formatDate(item.dueDate) %></span>
+							</div>
+						</li>
+						<% }); %>
+					</ul>
+					<%} else { %>
+					<span>No expense found.</span>
+					<% } %>
+				</div>
+			</main>
+
+			<button class="floating-action">
+				<i class="material-icons">add</i>
+			</button>
+
+			<%- include('../../partials/foot'); %>
+		</div>
+	</body>
+</html>

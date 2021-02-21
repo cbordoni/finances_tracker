@@ -1,0 +1,27 @@
+<div class="card rounded">
+	<div class="card-header">
+		<h6 class="card-title">Accounts</h6>
+	</div>
+
+	<% if (!accounts.length) { %>
+	<span class="text-primary" style="padding: 0 12px 8px">No account found.</span>
+	<% } %>
+
+	<div class="card-body">
+		<ul class="list">
+			<% accounts.forEach((item) => { %>
+			<li class="row" tabindex="0">
+				<div class="flex">
+					<span class="text-primary"><%= item.title %></span>
+					<span class="text-secondary">Foreseen</span>
+				</div>
+
+				<div style="text-align: right">
+					<span class="text-primary"><%= formatMoney(item.balance) %></span>
+					<span class="text-secondary"><%= formatMoney(item.foreseen) %></span>
+				</div>
+			</li>
+			<% }); %>
+		</ul>
+	</div>
+</div>

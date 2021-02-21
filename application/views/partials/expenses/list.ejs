@@ -1,0 +1,31 @@
+<div class="card rounded">
+	<div class="card-header">
+		<h6 class="card-title">Last expenses</h6>
+
+		<button id="bt-open-expenses" class="icon">
+			<i class="material-icons">launch</i>
+		</button>
+	</div>
+
+	<% if (!expenses.length) { %>
+	<span class="text-primary" style="padding: 0 12px 8px">No expense found.</span>
+	<% } %>
+
+	<div class="card-body">
+		<ul class="list">
+			<% expenses.forEach((item) => { %>
+			<li class="row" tabindex="0">
+				<div class="flex">
+					<span class="text-primary"><%= item.title %></span>
+					<span class="text-secondary"><%= item.account.title %></span>
+				</div>
+
+				<div style="text-align: right">
+					<span class="text-primary"><%= formatMoney(item.amount) %></span>
+					<span class="text-secondary"><%= formatDate(item.dueDate) %></span>
+				</div>
+			</li>
+			<% }); %>
+		</ul>
+	</div>
+</div>
