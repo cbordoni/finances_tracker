@@ -44,17 +44,22 @@ Utils.getMaskedDate = (date) => {
 };
 
 Utils.getWeenSpan = (date) => {
-	date = Utils.getDayRef(date);
-
 	date.setDate(new Date().getDate());
+	
+	const originalDate = new Date(date);
 
-	date.setDate(date.getDate() - date.getDay() - 6);
+	date.setDate(date.getDate() - date.getDay() + 1);
 
 	var firstDay = new Date(date);
 
-	date.setDate(date.getDate() + 7);
+	date.setDate(date.getDate() + 6);
 
 	var lastDay = new Date(date);
+
+	console.log(`\n`);
+	console.log(`Overview chart data`);
+	console.log(`> First day: ${firstDay}`);
+	console.log(`> Last day: ${lastDay}`);
 
 	return { firstDay, lastDay };
 };

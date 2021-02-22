@@ -14,17 +14,19 @@
 
 					<ul class="list">
 						<% expenses.forEach((item) => { %>
-						<li class="w-border w-icon row" tabindex="0">
-							<div class="rounded-icon">
-								<i class="material-icons"><%= getStatusIcon(item) %></i>
+						<li class="list-item w-border w-icon" tabindex="0">
+							<div class="icon" style="<%= 'background-color: ' + getStatusColor(item) + '33' %>">
+								<i class="material-icons" style="<%= 'color: ' + getStatusColor(item) %>">
+									<%= getStatusIcon(item) %>
+								</i>
 							</div>
 
-							<div class="flex">
+							<div class="main">
 								<span class="text-secondary"><%= item.account.title %></span>
 								<span class="text-primary"><%= item.title %></span>
 							</div>
 
-							<div style="text-align: right">
+							<div class="extra">
 								<span class="text-primary"><%= formatMoney(item.amount) %></span>
 								<span class="text-secondary"><%= formatDate(item.dueDate) %></span>
 							</div>
@@ -37,11 +39,13 @@
 				</div>
 			</main>
 
-			<button class="floating-action">
+			<button id="bt-add-expense" class="floating-action">
 				<i class="material-icons">add</i>
 			</button>
 
 			<%- include('../../partials/foot'); %>
+
+			<script src="/js/expenses.js"></script>
 		</div>
 	</body>
 </html>

@@ -16,6 +16,33 @@
 // }
 
 (function () {
+	const registerTextField = (parent) => {
+		const input = parent.querySelector('.text-field--input');
+		const label = parent.querySelector('.text-field--label');
+
+		if (input) {
+			input.addEventListener('focus', () => {
+				parent.classList.add('is-focused');
+			});
+
+			input.addEventListener('input', (e) => {
+				if (e.target.value) {
+					parent.classList.add('is-filled');
+				} else {
+					parent.classList.remove('is-filled');
+				}
+			});
+
+			input.addEventListener('blur', () => {
+				parent.classList.remove('is-focused');
+			});
+		}
+	};
+
+	for (let item of document.querySelectorAll('.text-field')) {
+		registerTextField(item);
+	}
+
 	const getMonthRef = () => {
 		var date = new Date();
 

@@ -14,13 +14,19 @@
 	<div class="card-body">
 		<ul class="list">
 			<% expenses.forEach((item) => { %>
-			<li class="row" tabindex="0">
-				<div class="flex">
+			<li class="list-item dense w-icon" tabindex="0">
+				<div class="icon" style="<%= 'background-color: ' + getStatusColor(item) + '33' %>">
+					<i class="material-icons" style="<%= 'color: ' + getStatusColor(item) %>">
+						<%= getStatusIcon(item) %>
+					</i>
+				</div>
+
+				<div class="main">
 					<span class="text-primary"><%= item.title %></span>
 					<span class="text-secondary"><%= item.account.title %></span>
 				</div>
 
-				<div style="text-align: right">
+				<div class="extra">
 					<span class="text-primary"><%= formatMoney(item.amount) %></span>
 					<span class="text-secondary"><%= formatDate(item.dueDate) %></span>
 				</div>

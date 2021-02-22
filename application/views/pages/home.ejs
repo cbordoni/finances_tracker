@@ -18,13 +18,17 @@
 						<div id="overview-container" class="card-body">
 							<ul class="list">
 								<% overview.forEach((item) => { %>
-								<li href="<%= item.href %>" class="row" tabindex="0">
-									<div class="flex">
+								<li href="<%= item.href %>" class="list-item dense w-icon" tabindex="0">
+									<div class="icon" style="<%= 'background-color: ' + item.color %>">
+										<i class="material-icons"><%= item.icon %></i>
+									</div>
+
+									<div class="main">
 										<span class="text-primary"><%= item.title %></span>
 										<span class="text-secondary">Foreseen</span>
 									</div>
 
-									<div style="text-align: right">
+									<div class="extra">
 										<span class="text-primary"><%= formatMoney(item.fulfilled) %></span>
 										<span class="text-secondary"><%= formatMoney(item.remaining) %></span>
 									</div>

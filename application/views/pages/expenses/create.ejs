@@ -11,16 +11,50 @@
 			<main>
 				<div class="painel">
 					<form>
-						<div class="text-field">
+						<div class="text-field not-empty-label">
+							<label class="text-field--label">Description</label>
 							<input class="text-field--input" placeholder="Description" />
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Recurrence</label>
+							<div class="text-field--select">
+								<div class="text-field-options"></div>
+							</div>
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Amount</label>
+							<input class="text-field--input" data-suffix="$" placeholder="$0.00" />
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Due date</label>
+							<input class="text-field--input" data-suffix="$" placeholder="" />
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Status</label>
+							<div class="text-field--select"></div>
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Category</label>
+							<div class="text-field--select"></div>
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Subcategory</label>
+							<div class="text-field--select"></div>
+						</div>
+
+						<div class="text-field">
+							<label class="text-field--label">Account</label>
+							<div class="text-field--select"></div>
 						</div>
 					</form>
 				</div>
 			</main>
-
-			<button class="floating-action">
-				<i class="material-icons">add</i>
-			</button>
 
 			<%- include('../../partials/foot'); %>
 		</div>

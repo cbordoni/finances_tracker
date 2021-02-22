@@ -4,6 +4,15 @@ const { EXPENSE_STATUS } = require('../models/expense.schema');
 const router = require('express').Router();
 
 module.exports = (app) => {
+	const getStatusColor = (expense) => {
+		switch (expense.status) {
+			case EXPENSE_STATUS.PENDING:
+				return '#e0e0e0';
+			case EXPENSE_STATUS.CONFIRMED:
+				return '#81c784';
+		}
+	};
+
 	const getStatusIcon = (expense) => {
 		switch (expense.status) {
 			case EXPENSE_STATUS.PENDING:
@@ -17,24 +26,24 @@ module.exports = (app) => {
 		const expenses = await new ExpenseController(req.referenceDate).findByMonth();
 
 		res.render(`${pagesDir}/expenses/index`, {
-			title: 'Expenses',
-			subtitle: 0.0,
+			headerOptions: {
+				title: 'Expenses',
+				backIcon: 'arrow_back',
+				showMonthPicker: true,
+			},
 			expenses,
-			backIcon: 'arrow_back',
+			getStatusColor,
 			getStatusIcon,
 			...req.renderInfo,
 		});
 	});
 
-	app.get('/expense', async (req, res) => {
-		const expenses = await new ExpenseController(req.referenceDate).findByMonth();
-
-		res.render(`${pagesDir}/expense/create`, {
-			title: 'Expenses',
-			subtitle: 0.0,
-			expenses,
-			backIcon: 'arrow_back',
-			getStatusIcon,
+	app.get('/expenses/create', async (req, res) => {
+		res.render(`${pagesDir}/expenses/create`, {
+			headerOptions: {
+				title: 'Add Expense',
+				backIcon: 'close',
+			},
 			...req.renderInfo,
 		});
 	});

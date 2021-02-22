@@ -5,6 +5,24 @@ const EXPENSE_STATUS = require('../models/expense.schema').EXPENSE_STATUS;
 
 const Utils = require('../utils/utils');
 
+const getStatusColor = (expense) => {
+	switch (expense.status) {
+		case EXPENSE_STATUS.PENDING:
+			return '#e0e0e0';
+		case EXPENSE_STATUS.CONFIRMED:
+			return '#81c784';
+	}
+};
+
+const getStatusIcon = (expense) => {
+	switch (expense.status) {
+		case EXPENSE_STATUS.PENDING:
+			return 'schedule';
+		case EXPENSE_STATUS.CONFIRMED:
+			return 'done';
+	}
+};
+
 module.exports = (app) => {
 	// index page
 	app.get('/', async (req, res) => {
@@ -18,10 +36,9 @@ module.exports = (app) => {
 
 		var aux = new Date(weekSpan.firstDay);
 
-		while (aux < weekSpan.lastDay) {
+		while (aux <= weekSpan.lastDay) {
 			weekExpenses.push({
-				title: `${(aux.getMonth() + 1).toString().padStart(2, '0')}/${aux
-					.getDate()
+				title: `${aux.getDate().toString().padStart(2, '0')}/${(aux.getMonth() + 1)
 					.toString()
 					.padStart(2, '0')}`,
 				amount: expenses
@@ -54,7 +71,7 @@ module.exports = (app) => {
 				icon: 'add',
 				fulfilled: 0.0,
 				remaining: 0.0,
-				color: '#2e7d32',
+				color: '#57bb8a',
 				href: '/incomes',
 			},
 
@@ -63,7 +80,7 @@ module.exports = (app) => {
 				icon: 'remove',
 				fulfilled: fulfilled,
 				remaining: remaining,
-				color: '#c62828',
+				color: '#e06055',
 				href: '/expenses',
 			},
 		];
@@ -74,6 +91,11 @@ module.exports = (app) => {
 			overview,
 			expenses: expenses.slice(0, 5),
 			accounts,
+			headerOptions: {
+				showMonthPicker: true,
+			},
+			getStatusColor,
+			getStatusIcon,
 			...req.renderInfo,
 		});
 	});

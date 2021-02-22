@@ -87,7 +87,6 @@ module.exports = class AccountController {
 
 	async getReducedAccountBalanceByMonth(_id) {
 		const date = new Date(this.referenceDate.toString());
-		date.setDate(1);
 
 		const account = await AccountSchema.findOne(
 			{

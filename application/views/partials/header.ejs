@@ -1,29 +1,29 @@
 <header>
 	<div class="header-main">
-		<% if (locals.backIcon) { %>
+		<% if (locals.headerOptions.backIcon) { %>
 		<div class="header-left-action" style="margin: auto">
 			<button id="bt-home" class="icon">
-				<i class="material-icons"><%= backIcon %></i>
+				<i class="material-icons"><%= headerOptions.backIcon %></i>
 			</button>
 		</div>
 		<% } %>
 
 		<!--  -->
 
-		<% if (locals.title) { %>
+		<% if (locals.headerOptions.title) { %>
 		<div class="row">
 			<div>
-				<h6 id="header-title"><%= title %></h6>
+				<h6 id="header-title"><%= headerOptions.title %></h6>
 			</div>
 		</div>
-		<% } else { %>
+		<% } else if (locals.headerOptions.showMonthPicker) { %>
 		<!--  -->
 		<%- include('./month-picker'); %>
 		<!--  -->
 		<% } %>
 	</div>
 
-	<% if (locals.title) { %>
+	<% if (locals.headerOptions.title && locals.headerOptions.showMonthPicker) { %>
 	<div class="header-sub"><%- include('./month-picker'); %></div>
 	<% } %>
 
