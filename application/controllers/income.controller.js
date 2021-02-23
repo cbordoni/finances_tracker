@@ -1,18 +1,18 @@
-const ExpenseSchema = require('../models/expense.schema');
+const IncomeSchema = require('../models/income.schema');
 
 const { Types } = require('mongoose');
 
-module.exports = class ExpenseController {
+module.exports = class IncomeController {
 	constructor(date) {
 		this.referenceDate = date;
 	}
 
 	getExpensesCount() {
-		return Math.floor(Math.random() * 5 + 5);
+		return Math.floor(Math.random() + 1);
 	}
 
 	getAmount() {
-		return Number((Math.random() * 200 + 50).toFixed(2));
+		return Number((Math.random() * 1000 + 1000).toFixed(2));
 	}
 
 	getDueDate() {
@@ -41,19 +41,19 @@ module.exports = class ExpenseController {
 		console.log(`\n>Inserting ${total} documents\n`);
 
 		for (var i = 0; i < total; i++) {
-			ExpenseSchema({
-				title: `Expense #${i + 1} ${account.title}`,
-				recurrence: 0,
+			IncomeSchema({
+				title: `Income #${i + 1} ${account.title}`,
+				recurrence: 1,
 				amount: this.getAmount(),
 				dueDate: this.getDueDate(),
 				account: Types.ObjectId(account._id),
 			}).save((err, e) => {
 				if (err) throw err;
 
-				console.log(`> Expense saved: ${e._id}`);
+				console.log(`> Income saved: ${e._id}`);
 
 				try {
-					cb({ $push: { expenses: Types.ObjectId(e._id) } });
+					cb({ $push: { incomes: Types.ObjectId(e._id) } });
 				} catch (e) {
 					console.log('> Error', e.mesage);
 				}
@@ -62,7 +62,7 @@ module.exports = class ExpenseController {
 	}
 
 	async findByMonth() {
-		const expenses = await ExpenseSchema.find({
+		const incomes = await IncomeSchema.find({
 			dueDate: {
 				$gte: this.getMonthRef(this.referenceDate),
 				$lt: this.getMonthLastDayRef(this.referenceDate),
@@ -82,11 +82,11 @@ module.exports = class ExpenseController {
 			.sort({ dueDate: -1 })
 			.exec();
 
-		return expenses;
+		return incomes;
 	}
 
 	async findOverview(accountId) {
-		const expenses = await ExpenseSchema.find({
+		const incomes = await IncomeSchema.find({
 			dueDate: {
 				$gte: this.getMonthRef(this.referenceDate),
 				$lt: this.getMonthLastDayRef(this.referenceDate),
@@ -107,6 +107,6 @@ module.exports = class ExpenseController {
 			.sort({ dueDate: -1 })
 			.exec();
 
-		return expenses;
+		return incomes;
 	}
 };

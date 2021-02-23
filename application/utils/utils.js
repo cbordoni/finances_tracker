@@ -43,10 +43,15 @@ Utils.getMaskedDate = (date) => {
 	return date.toDateString().substr(4, 6).split(' ').join('/') + ' ' + date.toTimeString().substr(0, 5);
 };
 
+/**
+ *
+ * @param {Date} date
+ *
+ * @returns {Object} firstDay and lastDay
+ */
+
 Utils.getWeenSpan = (date) => {
 	date.setDate(new Date().getDate());
-	
-	const originalDate = new Date(date);
 
 	date.setDate(date.getDate() - date.getDay() + 1);
 
@@ -56,12 +61,25 @@ Utils.getWeenSpan = (date) => {
 
 	var lastDay = new Date(date);
 
-	console.log(`\n`);
-	console.log(`Overview chart data`);
-	console.log(`> First day: ${firstDay}`);
-	console.log(`> Last day: ${lastDay}`);
+	if (process.env.DEBUG) {
+		console.log(`\n`);
+		console.log(`> Overview chart data`);
+		console.log(`> First day: ${firstDay}`);
+		console.log(`> Last day: ${lastDay}`);
+	}
 
 	return { firstDay, lastDay };
+};
+
+/**
+ *
+ * @param {Date} date
+ *
+ * @returns day/month
+ */
+
+Utils.getFormattedDayAndMonth = (date) => {
+	return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}`;
 };
 
 module.exports = Utils;
