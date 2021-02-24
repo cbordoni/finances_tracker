@@ -1,0 +1,8 @@
+{
+	"compress": true,
+	"mangle": true,
+	"sourceMap": {
+		"filename": "{file}.min.js",
+		"root": "src/app/js"
+	}
+}

@@ -4,22 +4,30 @@ FROM node:alpine
 
 ## Define o local onde o app vai ficar no disco do container
 ## Pode ser o diretório que você quiser
-WORKDIR /usr/app
+WORKDIR /home/node/app
 
-## Copia tudo que começa com package e termina com .json para dentro da pasta /usr/app
-COPY package*.json ./
-
-## Executa npm install para adicionar as dependências e criar a pasta node_modules
-RUN npm install
+RUN  mkdir -p /home/node/app/
 
 ## Copia tudo que está no diretório onde o arquivo Dockerfile está 
 ## para dentro da pasta /usr/app do container
 ## Vamos ignorar a node_modules por isso criaremos um .dockerignore
 COPY . .
 
-## Container ficará ouvindo os acessos na porta 9000
-EXPOSE 9000
+RUN yarn global add node-sass uglifyjs-folder
 
-## Não se repete no Dockerfile
-## Executa o comando npm start para iniciar o script que que está no package.json
-CMD npm start
+ENV PATH="$PATH:/node_modules/.bin"
+
+## Executa npm install para adicionar as dependências e criar a pasta node_modules
+RUN yarn install
+
+RUN rm -rf public/
+
+RUN mkdir public/
+
+RUN cp -r src/static/* public	
+
+RUN node-sass src/app/scss -o public/styles
+
+RUN uglifyjs-folder src/app/js -eo public/js 
+
+RUN	node app

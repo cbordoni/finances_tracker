@@ -54,18 +54,17 @@
 		<%- include('../partials/foot'); %>
 
 		<script>
-			var ctx = document.querySelector('#expensesChart').getContext('2d');
+			var ctx = document.querySelector('#expenses-chart').getContext('2d');
 
-			var labels = '<%= weekExpenses.map((e) => e.title) %>'.split(',');
-			var data = '<%= weekExpenses.map((e) => e.amount) %>'.split(',');
+			var data = <%- JSON.stringify(weekExpenses) %>;
 
 			new Chart(ctx, {
 				type: 'line',
 				data: {
-					labels: labels,
+					labels: data.map(e => e.title),
 					datasets: [
 						{
-							data: data,
+							data: data.map(e => e.amount),
 							pointBackgroundColor: '#c9574d',
 							pointBorderColor: '#c9574d',
 							backgroundColor: '#2d2e31',

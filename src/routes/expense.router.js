@@ -1,27 +1,10 @@
 const ExpenseController = require('../controllers/expense.controller');
-const { EXPENSE_STATUS } = require('../models/expense.schema');
+
+const { getStatusColor, getStatusIcon } = require('../models/transaction.schema');
 
 const router = require('express').Router();
 
 module.exports = (app) => {
-	const getStatusColor = (expense) => {
-		switch (expense.status) {
-			case EXPENSE_STATUS.PENDING:
-				return '#e0e0e0';
-			case EXPENSE_STATUS.CONFIRMED:
-				return '#81c784';
-		}
-	};
-
-	const getStatusIcon = (expense) => {
-		switch (expense.status) {
-			case EXPENSE_STATUS.PENDING:
-				return 'schedule';
-			case EXPENSE_STATUS.CONFIRMED:
-				return 'done';
-		}
-	};
-
 	app.get('/expenses', async (req, res) => {
 		const expenses = await new ExpenseController(req.referenceDate).findByMonth();
 

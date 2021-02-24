@@ -1,17 +1,16 @@
-.PHONY: run-server
-run-server:
-	node-sass ./application/scss -o ./public/styles
+.PHONY: start
+start:
+	rm -rf public/
+	
+	mkdir public/
+	
+	cp -r src/static/* public	
+
+	node-sass src/app/scss -o public/styles
+	uglifyjs-folder src/app/js -eo public/js 
+	
 	node app
 
-.PHONY: run-server-staging
-run-server-staging:
-	node-sass -w ./application/scss -o ./public/styles
-	nodemon app
-
-.PHONY: deploy
-deploy:
-	rm -rf dist/
-	mkdir dist
-	cp -r application dist
-	cp
-	cp app.js dist
+.PHONY: build
+build: 
+	docker-compose up --build

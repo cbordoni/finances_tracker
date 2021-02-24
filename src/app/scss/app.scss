@@ -17,6 +17,8 @@
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	-webkit-tap-highlight-color: transparent;
+	letter-spacing: 0.7px !important;
+	font-size: 16px;
 }
 
 body {
@@ -25,7 +27,6 @@ body {
 	padding: 0;
 	color: var(--text);
 	overflow: hidden;
-	letter-spacing: 0.7px !important;
 
 	&.dark-mode {
 		--primary: #202124;
@@ -284,6 +285,7 @@ button {
 	border: none;
 	background-color: transparent;
 	padding: 0;
+	border-radius: 2px;
 
 	&.icon {
 		color: inherit;
@@ -301,6 +303,17 @@ button {
 		}
 	}
 
+	&.flat {
+		color: var(--text);
+		padding: 0 12px;
+		min-width: 88px;
+
+		&:hover,
+		&:focus {
+			background-color: var(--border);
+		}
+	}
+
 	&.floating-action {
 		width: 56px;
 		height: 56px;
@@ -311,16 +324,13 @@ button {
 		bottom: 16px;
 		right: 16px;
 		z-index: 5;
-		box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14),
-			0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+		box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 		// box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
 		animation: scale-in 500ms forwards;
-		transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-			box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+		transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
 		&:active {
-			box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14),
-				0px 5px 22px 4px rgba(0, 0, 0, 0.12);
+			box-shadow: 0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 12px 17px 2px rgba(0, 0, 0, 0.14), 0px 5px 22px 4px rgba(0, 0, 0, 0.12);
 		}
 
 		i.material-icons {
@@ -441,12 +451,15 @@ form {
 	flex-direction: row;
 	overflow: hidden;
 
+	#bt-current-month {
+		animation: slide-in 500ms forwards;
+	}
+
 	#month-name {
 		min-width: 156px;
 		text-transform: capitalize;
 		line-height: 32px;
 		text-align: center;
-		animation: slide-in 500ms forwards;
 	}
 }
 

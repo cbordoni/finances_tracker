@@ -91,6 +91,12 @@
 		}
 	};
 
+	if (document.querySelector('#bt-current-month')) {
+		document.querySelector('#bt-current-month').addEventListener('click', (e) => {
+			location.href = `${location.origin}${location.pathname}`;
+		});
+	}
+
 	if (document.querySelector('#month-name')) {
 		document.querySelector('#month-name').innerHTML = getDateFromParam().toLocaleString('default', {
 			month: 'long',

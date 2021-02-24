@@ -21,7 +21,18 @@ Utils.money = {
 	},
 };
 
-Utils.getFormattedDate = (date) => {
+Utils.getFormattedDate = (date, mask) => {
+	mask = mask.replace(/yyyy/gi, date.getFullYear());
+	mask = mask.replace(/MM/gi, (date.getMonth() + 1).toString().padStart(2, '0'));
+	mask = mask.replace(/dd/gi, date.getDate().toString().padStart(2, '0'));
+	mask = mask.replace(/hh/gi, date.getHours().toString().padStart(2, '0'));
+	mask = mask.replace(/mm/gi, date.getMinutes().toString().padStart(2, '0'));
+	mask = mask.replace(/ss/gi, date.getSeconds().toString().padStart(2, '0'));
+
+	return mask;
+};
+
+Utils.getDefaultDate = (date) => {
 	try {
 		if (!date) throw new Error('No date provided');
 
@@ -41,6 +52,10 @@ Utils.getDayRef = (date) => {
 
 Utils.getMaskedDate = (date) => {
 	return date.toDateString().substr(4, 6).split(' ').join('/') + ' ' + date.toTimeString().substr(0, 5);
+};
+
+Utils.getMonthDiff = (dateFrom, dateTo) => {
+	return Math.abs(dateTo.getMonth() - dateFrom.getMonth() + 12 * (dateTo.getFullYear() - dateFrom.getFullYear()));
 };
 
 /**

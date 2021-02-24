@@ -71,13 +71,8 @@ module.exports = class ExpenseController {
 		})
 			.populate({
 				path: 'account',
-				match: {
-					isActive: true,
-				},
-				select: {
-					title: 1,
-					openingBalance: 1,
-				},
+				match: { isActive: true },
+				select: { title: 1, openingBalance: 1 },
 			})
 			.sort({ dueDate: -1 })
 			.exec();
@@ -92,7 +87,7 @@ module.exports = class ExpenseController {
 				$lt: this.getMonthLastDayRef(this.referenceDate),
 			},
 			isActive: true,
-			account: accountId
+			account: accountId,
 		})
 			.populate({
 				path: 'account',

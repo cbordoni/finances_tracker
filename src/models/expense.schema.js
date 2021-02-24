@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
+const { TRANSACTION_STATUS } = require('./transaction.schema');
 
-const EXPENSE_STATUS = {
-	PENDING: 0,
-	CONFIRMED: 1,
-};
+const { Schema } = mongoose;
 
 const ExpenseSchema = mongoose.Schema({
 	title: { type: String, required: true },
-	recurrence: { type: Number, default: EXPENSE_STATUS.PENDING },
+	recurrence: { type: Number, default: TRANSACTION_STATUS.PENDING },
 	amount: { type: Number, required: true },
 	dueDate: { type: Date, required: true },
 	insertedDate: { type: Date, default: Date.now },
@@ -23,5 +20,3 @@ const ExpenseSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model('Expense', ExpenseSchema);
-
-module.exports.EXPENSE_STATUS = EXPENSE_STATUS;
